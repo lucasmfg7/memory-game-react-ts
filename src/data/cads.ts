@@ -1,9 +1,4 @@
-export interface Cards {
-  src: string;
-  id?: number;
-}
-
-export const cardImages: Cards[] = [
+export const cardImages = [
   { src: "../../img/helmet-1.png" },
   { src: "../../img/potion-1.png" },
   { src: "../../img/ring-1.png" },

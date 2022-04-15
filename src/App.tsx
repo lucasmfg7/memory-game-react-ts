@@ -1,6 +1,12 @@
 import { useState } from "react";
 import "./App.css";
-import { cardImages, Cards } from "./data/cads";
+import { SingleCard } from "./components/SingleCard";
+import { cardImages } from "./data/cads";
+
+export interface Cards {
+  src: string;
+  id: number;
+}
 
 const App = () => {
   const [cards, setCards] = useState<Cards[]>([]);
@@ -21,11 +27,8 @@ const App = () => {
       <button onClick={shuffleCards}>Novo Jogo</button>
       <div className="card-grid">
         {cards.map((card) => (
-          <div className="card" key={card.id}>
-            <div>
-              <img className="front" src={card.src} alt="front card" />
-              <img className="back" src="../img/cover.png" alt="back card" />
-            </div>
+          <div key={card.id}>
+            <SingleCard key={card.id} card={card} />
           </div>
         ))}
       </div>
