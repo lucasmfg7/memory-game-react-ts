@@ -1,5 +1,6 @@
 export interface Cards {
   src: string;
+  id?: number;
 }
 
 export const cardImages: Cards[] = [
