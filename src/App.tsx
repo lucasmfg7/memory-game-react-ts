@@ -17,6 +17,10 @@ const App = () => {
   const [disable, setDisable] = useState(false);
 
   useEffect(() => {
+    shuffleCards();
+  }, []);
+
+  useEffect(() => {
     handleCompareChoices();
   }, [choiceOne, choiceTwo]);
 
@@ -25,6 +29,8 @@ const App = () => {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
 
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setCards(shuffledCards);
     setTurns(0);
   }
@@ -77,6 +83,7 @@ const App = () => {
           </div>
         ))}
       </div>
+      <p>Turnos: {turns}</p>
     </div>
   );
 };
