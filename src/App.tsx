@@ -6,6 +6,7 @@ import { cardImages } from "./data/cads";
 export interface Card {
   src: string;
   id: number;
+  matched: boolean;
 }
 
 const App = () => {
@@ -34,11 +35,18 @@ const App = () => {
   function handleCompareChoices() {
     if (choiceOne && choiceTwo) {
       if (choiceOne.src === choiceTwo.src) {
-        console.log("Match");
+        setCards((prevCards) => {
+          return prevCards.map((card) => {
+            if (card.src === choiceOne.src) {
+              return { ...card, matched: true };
+            } else {
+              return card;
+            }
+          });
+        });
         resetTurn();
       } else {
-        console.log("Dont Match");
-        resetTurn();
+        setTimeout(() => resetTurn(), 1000);
       }
     }
   }
@@ -56,7 +64,12 @@ const App = () => {
       <div className="card-grid">
         {cards.map((card) => (
           <div key={card.id}>
-            <SingleCard key={card.id} card={card} handleChoice={handleChoice} />
+            <SingleCard
+              key={card.id}
+              card={card}
+              handleChoice={handleChoice}
+              flipped={card === choiceOne || card === choiceTwo || card.matched}
+            />
           </div>
         ))}
       </div>
