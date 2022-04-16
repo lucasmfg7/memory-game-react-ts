@@ -9,11 +9,19 @@ interface CardProps {
   };
   handleChoice: (card: Card) => void;
   flipped: boolean;
+  disable: boolean;
 }
 
-export const SingleCard = ({ card, handleChoice, flipped }: CardProps) => {
+export const SingleCard = ({
+  card,
+  handleChoice,
+  flipped,
+  disable,
+}: CardProps) => {
   function handleClick() {
-    handleChoice(card);
+    if (!disable) {
+      handleChoice(card);
+    }
   }
   return (
     <div className="card">
