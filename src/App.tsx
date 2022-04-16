@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { SingleCard } from "./components/SingleCard";
 import { cardImages } from "./data/cads";
@@ -11,8 +11,12 @@ export interface Card {
 const App = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [turns, setTurns] = useState<number>(0);
-  const [choiceOne, setChoiceOne] = useState<Card>();
-  const [choiceTwo, setChoiceTwo] = useState<Card>();
+  const [choiceOne, setChoiceOne] = useState<Card | null>(null);
+  const [choiceTwo, setChoiceTwo] = useState<Card | null>(null);
+
+  useEffect(() => {
+    handleCompareChoices();
+  }, [choiceOne, choiceTwo]);
 
   function shuffleCards() {
     const shuffledCards = [...cardImages, ...cardImages]
@@ -25,6 +29,24 @@ const App = () => {
 
   function handleChoice(card: Card) {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+  }
+
+  function handleCompareChoices() {
+    if (choiceOne && choiceTwo) {
+      if (choiceOne.src === choiceTwo.src) {
+        console.log("Match");
+        resetTurn();
+      } else {
+        console.log("Dont Match");
+        resetTurn();
+      }
+    }
+  }
+
+  function resetTurn() {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns((prevTurns) => prevTurns + 1);
   }
 
   return (
