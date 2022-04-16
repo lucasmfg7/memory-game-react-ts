@@ -4,7 +4,7 @@ Magic Match
 
 <p align="center">Project developed in React with Typescript to practice the basic concepts of the library.</p>
 
-### [Demo](lucasmfg7-magic-match.netlify.app)
+### [Demo](https://lucasmfg7-magic-match.netlify.app/)
 
 ### 💡 Features
 
